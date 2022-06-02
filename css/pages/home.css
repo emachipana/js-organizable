@@ -1,0 +1,50 @@
+.container-home {
+    display: flex;
+}
+
+.home__aside {
+    background-color: white;
+    height: 100vh;
+    max-width: 240px;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 0;
+}
+
+.aside__navbar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.navbar__link {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.navbar__link__text {
+    color: var(--gray-300);
+    font-family: var(--font-secondary);
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+}
+
+.selected {
+    background-color: var(--primary-100);
+    border-left: 4px solid var(--primary-500);
+}
+
+.selected .navbar__link__text {
+    color: var(--gray-400);
+}
+
+.logout {
+    margin: 0.5rem auto;
+}
