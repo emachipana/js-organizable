@@ -1,7 +1,6 @@
 .input-container {
     display: flex;
     align-items: center;
-    justify-content: center;
     background-color: white;
     gap: 0.5rem;
     padding: 0.5rem 12px;
