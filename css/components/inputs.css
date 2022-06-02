@@ -1,0 +1,60 @@
+.input-container {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    gap: 0.5rem;
+    padding: 0.5rem 12px;
+    width: 100%;
+    border-radius: 6px;
+    margin: 0.4rem 0;
+}
+
+.form__input {
+    appearance: none;
+    border: none;
+    outline: none;
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--gray-400);
+}
+
+.form__label {
+    font-family: var(--font-secondary);
+    font-size: 12px;
+    line-height: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gray-400);
+}
+
+.list__form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form__card-input {
+    background-color: white;
+    appearance: none;
+    border: none;
+    outline: none;
+    padding: 0.5rem;
+    border-radius: 8px;
+    font-family: var(--font-secondary);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    max-width: 226px;
+}
+
+.form__card-icon {
+    background-color: var(--secondary-300);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+}

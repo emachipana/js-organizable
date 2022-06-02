@@ -1,0 +1,39 @@
+.sessions-container {
+    margin: 2rem auto;
+    max-width: 704px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.sessions-container__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.header__title {
+    font-family: var(--font-primary);
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 36px;
+    color: var(--gray-500);
+}
+
+.sessions-container__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.form__container-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}

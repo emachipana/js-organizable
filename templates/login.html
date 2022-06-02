@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./../css/styles.css">
+</head>
+<body>
+    <main class="sessions-container">
+        <header class="sessions-container__header">
+            <img src="./../assets/images/logo.png" class="logo" alt="logo-image">
+            <h1 class="header__title">Login</h1>
+        </header>
+        <form class="sessions-container__form">
+            <div class="form__container-input">
+                <label for="username" class="form__label">Username</label>
+                <div class="input-container">
+                    <img src="./../assets/icons/avatar.svg" alt="avatar-icon">
+                    <input type="text" class="form__input" placeholder="username" id="username" name="username" required>
+                </div>
+            </div>
+            <div class="form__container-input">
+                <label for="password" class="form__label">password</label>
+                <div class="input-container">
+                    <img src="./../assets/icons/key.svg" alt="key-icon">
+                    <input type="password" class="form__input" placeholder="password" id="password" name="password" required>
+                </div>
+            </div>
+            <div class="form__container-buttons">
+                <button type="submit" class="form__submit">Login</button>
+                <a href="#" class="form__link">Create Account</a>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
