@@ -12,3 +12,9 @@ export async function getBoard(id) {
 
     return board;
 }
+
+export async function createBoard(newBoard = {name, color}) {
+    const boardCreated = await apiFetch("boards", { body: newBoard });
+
+    return boardCreated;
+}
