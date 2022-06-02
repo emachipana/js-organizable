@@ -4,9 +4,56 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SignUp</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="./../css/styles.css">
 </head>
 <body>
-    
+    <main class="sessions-container">
+        <header class="sessions-container__header">
+            <img src="./../assets/images/logo.png" alt="logo-image">
+            <h1 class="header__title">Create Account</h1>
+        </header>
+        <form class="sessions-container__form">
+            <div class="form__container-input">
+                <label for="username" class="form__label">Username</label>
+                <div class="input-container">
+                    <img src="./../assets/icons/avatar.svg" alt="avatar-icon">
+                    <input type="text" class="form__input" placeholder="username" id="username" name="username" required>
+                </div>
+            </div>
+            <div class="form__container-input">
+                <label for="email" class="form__label">email</label>
+                <div class="input-container">
+                    <img src="./../assets/icons/mail.svg" alt="key-icon">
+                    <input type="email" class="form__input" placeholder="email@mail.com" id="email" name="email" required>
+                </div>
+            </div>
+            <div class="form__container-input">
+                <label for="fName" class="form__label">first name</label>
+                <div class="input-container">
+                    <img src="./../assets/icons/info.svg" alt="key-icon">
+                    <input type="text" class="form__input" placeholder="name" id="fName" name="fName" required>
+                </div>
+            </div>
+            <div class="form__container-input">
+                <label for="lName" class="form__label">last name</label>
+                <div class="input-container">
+                    <img src="./../assets/icons/info.svg" alt="key-icon">
+                    <input type="text" class="form__input" placeholder="last name" id="lName" name="lName" required>
+                </div>
+            </div>
+            <div class="form__container-input">
+                <label for="password" class="form__label">password</label>
+                <div class="input-container">
+                    <img src="./../assets/icons/key.svg" alt="key-icon">
+                    <input type="password" class="form__input" placeholder="password" id="password" name="password" required>
+                </div>
+            </div>
+            <div class="form__container-buttons">
+                <button type="submit" class="form__submit">Create Account</button>
+                <a href="#" class="form__link">Login</a>
+            </div>
+        </form>
+    </main>
 </body>
 </html>
