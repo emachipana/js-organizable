@@ -6,3 +6,9 @@ export async function getBoards() {
 
     return boards;
 }
+
+export async function getBoard(id) {
+    const board = await apiFetch(`boards/${id}`);
+
+    return board;
+}

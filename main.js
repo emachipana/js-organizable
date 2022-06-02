@@ -1,4 +1,4 @@
-import { getBoards } from "./scripts/services/board-services.js";
+import { getBoards, getBoard } from "./scripts/services/board-services.js";
 import { login } from "./scripts/services/session-services.js";
 
 
@@ -10,7 +10,8 @@ const credentials = {
 
 async function test() {
     await login(credentials);
-    const data = await getBoards();
+    // const data = await getBoards();
+    // const data = await getBoard(696);
     console.log(data);
 }
 
