@@ -18,3 +18,9 @@ export async function createBoard(newBoard = {name, color}) {
 
     return boardCreated;
 }
+
+export async function deleteBoard(id) {
+    const boardDeleted = await apiFetch(`boards/${id}`, { method: "DELETE" });
+
+    return boardDeleted;
+}
