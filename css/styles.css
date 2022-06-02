@@ -2,6 +2,7 @@
 @import url(layouts/colors.css);
 @import url(components/inputs.css);
 @import url(components/buttons.css);
+@import url(components/cards.css);
 @import url(pages/sessions.css);
 @import url(pages/home.css);
 
