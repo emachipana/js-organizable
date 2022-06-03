@@ -36,7 +36,7 @@ function render() {
 
                 <div class="form__container-buttons">
                     <button type="submit" class="form__submit">Login</button>
-                    <a href="#" class="form__link">Create Account</a>
+                    <a href="#" class="form__link signup">Create Account</a>
                 </div>
             </form>
         </main>
@@ -44,7 +44,7 @@ function render() {
 }
 
 function listenSignUpLink() {
-    const link = document.querySelector(".form__link");
+    const link = document.querySelector(".signup");
     const root = document.querySelector("#root");
 
     link.addEventListener("click", event => {
