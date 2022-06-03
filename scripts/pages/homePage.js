@@ -3,6 +3,7 @@ import { tokenKey } from "./../config.js";
 import LoginPage from "./loginPage.js";
 import STORE from "../store.js";
 import { createBoard, deleteBoard } from "../services/board-services.js";
+import { logout } from "../services/session-services.js";
 
 function render() {
     return `
@@ -36,13 +37,26 @@ function render() {
     `
 }
 
+function listenLogoutLink() {
+    const link = document.querySelector(".logout");
+    const root = document.querySelector("#root");
+
+    link.addEventListener("click", async e => {
+        e.preventDefault()
+
+        await logout()
+        STORE.setCurrentPage("login");
+        DOMHandler.load(LoginPage(), root);
+    })
+}
+
 function HomePage() {
     return {
         toString() {
             return render();
         },
         addListeners() {
-
+            listenLogoutLink();
         }
     }
 }
