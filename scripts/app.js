@@ -1,6 +1,7 @@
 import { tokenKey } from "./config.js";
 import DOMHandler from "./dom-handler.js";
 import LoginPage from "./pages/loginPage.js";
+import SignUpPage from "./pages/signupPage.js";
 import STORE from "./store.js";
 
 const root = document.querySelector("#root");
