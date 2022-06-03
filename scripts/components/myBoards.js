@@ -1,15 +1,6 @@
 import STORE from "./../store.js"
 import DOMHandler from "./../dom-handler.js"
-import { getBoards, updateBoard } from "../services/board-services.js";
-
-function validColor(color) {
-    const colors = [ "greenyellow", "green", "orange", "red", "purple", "blue", "pink", "gray", "skyblue" ];
-    if(colors.includes(color)){
-        return color;
-    } else {
-        return "gray";
-    }
-}
+import { getBoards, updateBoard, validColor } from "../services/board-services.js";
 
 function renderBoard(board){
     return `

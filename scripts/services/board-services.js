@@ -42,3 +42,12 @@ export async function updateBoard(action, id) {
     }
     await apiFetch(`boards/${id}`, {method: "PATCH", body: body });
 }
+
+export function validColor(color) {
+    const colors = [ "greenyellow", "green", "orange", "red", "purple", "blue", "pink", "gray", "skyblue" ];
+    if(colors.includes(color)){
+        return color;
+    } else {
+        return "gray";
+    }
+}
