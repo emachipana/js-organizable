@@ -6,14 +6,12 @@ function render() {
     `
 }
 
-function closedBoards() {
-    return {
-        toString() {
-            return render();
-        },
-        addListeners() {
+const closedBoards = {
+    toString() {
+        return render();
+    },
+    addListeners() {
 
-        }
     }
 }
 

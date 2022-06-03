@@ -6,14 +6,12 @@ function render() {
     `
 }
 
-function myBoards() {
-    return {
-        toString() {
-            return render();
-        },
-        addListeners() {
+const myBoards = {
+    toString() {
+        return render();
+    },
+    addListeners() {
 
-        }
     }
 }
 

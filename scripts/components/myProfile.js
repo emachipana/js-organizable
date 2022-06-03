@@ -1,19 +1,17 @@
 function render() {
-    render `
+    return `
         <header>
             <h1 class="home__main__title">My Profile</h1>
         </header>
     `
 }
 
-function myProfile() {
-    return {
-        toString() {
-            return render()
-        },
-        addListeners() {
+const myProfile = {
+    toString() {
+        return render();
+    },
+    addListeners() {
 
-        }
     }
 }
 
