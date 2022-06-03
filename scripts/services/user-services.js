@@ -31,3 +31,9 @@ export async function getUser(id) {
     
     return user;
 }
+
+export async function deleteUser(id) {
+    const userDeleted = await apiFetch(`users/${id}`, { method: "DELETE" });
+
+    return userDeleted;
+}

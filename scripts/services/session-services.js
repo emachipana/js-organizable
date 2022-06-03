@@ -1,4 +1,4 @@
-import { tokenKey } from "./../config.js"
+import { tokenKey , currentUserKey} from "./../config.js"
 import apiFetch from "./api-fetch.js"
 
 export async function login(credentials = { username, password }) {
@@ -11,7 +11,7 @@ export async function login(credentials = { username, password }) {
 export async function logout() {
     const data = await apiFetch("logout", { method: "POST" });
     sessionStorage.removeItem(tokenKey);
-    sessionStorage.removeItem("currentUser");
+    sessionStorage.removeItem(currentUserKey);
 
     return data;
 }
