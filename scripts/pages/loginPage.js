@@ -5,6 +5,7 @@ import DOMHandler from "./../dom-handler.js";
 import STORE from "./../store.js";
 import { getBoards } from "./../services/board-services.js";
 import SignUpPage from "./signupPage.js"
+import HomePage from "./homePage.js";
 
 function render() {
     return `
@@ -56,7 +57,28 @@ function listenSignUpLink() {
 }
 
 function listenSubmitForm() {
+    const form = document.querySelector(".sessions-container__form");
+    const root = document.querySelector("#root");
 
+    form.addEventListener("submit", async e => {
+        e.preventDefault();
+
+        const { username, password } = e.target;
+        const credentials = {
+            username: username.value,
+            password: password.value
+        }
+
+        const user = await login(credentials);
+
+        STORE.setUser(user);
+        STORE.setCurrentPage("boards");
+
+        const boards = await getBoards();
+        STORE.setBoards(boards);
+
+        DOMHandler.load(HomePage(), root)
+    })
 }
 
 function LoginPage() {
