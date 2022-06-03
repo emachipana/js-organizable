@@ -8,7 +8,7 @@ function renderBoard(board){
             <p class="card__title">${board.name}</p>
             <div class="card__buttons">
                 <a href="#" class="card-button">
-                    <img src="./../assets/icons/trash.svg" alt="trash-icon" data-action="delete" data-id="${board.id}">
+                    <img src="./../assets/icons/trash.svg" alt="trash-icon" data-action="update" data-id="${board.id}">
                 </a>
                 <a href="#" class="card-button">
                     <img src="./../assets/icons/${board.starred ? "star-fill.svg" : "star.svg"}" alt="star-icon" data-action="starred" data-id="${board.id}">
