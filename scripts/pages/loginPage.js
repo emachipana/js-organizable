@@ -55,6 +55,10 @@ function listenSignUpLink() {
     })
 }
 
+function listenSubmitForm() {
+
+}
+
 function LoginPage() {
     return {
         toString() {
@@ -62,6 +66,7 @@ function LoginPage() {
         },
         addListeners() {
             listenSignUpLink();
+            listenSubmitForm();
         }
     }
 }
