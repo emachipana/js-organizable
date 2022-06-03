@@ -1,8 +1,9 @@
 import DOMHandler from "./../dom-handler.js"
 import { input } from "./../components/input.js";
 import STORE from "../store.js";
-import { currentUserKey } from "../config.js";
-import { updateProfile } from "../services/user-services.js";
+import { currentUserKey, tokenKey } from "../config.js";
+import { deleteUser, updateProfile } from "../services/user-services.js";
+import LoginPage from "../pages/loginPage.js";
 
 function render() {
     const user = STORE.user;
@@ -87,12 +88,30 @@ function listenSubmitForm() {
     })
 }
 
+function listenDeleteAccount() {
+    const button = document.querySelector(".form__submit--delete");
+    const root = document.querySelector("#root");
+    const currentUser = STORE.user;
+
+    button.addEventListener("click", async e => {
+        e.preventDefault();
+
+        await deleteUser(currentUser.id);
+        sessionStorage.removeItem(tokenKey);
+        sessionStorage.removeItem(currentUserKey);
+        STORE.setCurrentPage("login");
+
+        DOMHandler.load(LoginPage(), root);
+    })
+}
+
 const myProfile = {
     toString() {
         return render();
     },
     addListeners() {
         listenSubmitForm();
+        listenDeleteAccount();
     }
 }
 
