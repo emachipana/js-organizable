@@ -4,8 +4,8 @@ import LoginPage from "./pages/loginPage.js";
 import SignUpPage from "./pages/signupPage.js";
 import HomePage from "./pages/homePage.js"
 import STORE from "./store.js";
-import { getUser } from "./services/user-services.js";
 import { getBoards } from "./services/board-services.js";
+import HomePagesHanlder from "./pages/homePagesHandler.js";
 
 const root = document.querySelector("#root");
 
@@ -33,6 +33,7 @@ export async function App() {
     try {
         const boards = await getBoards();
         STORE.setBoards(boards);
+        HomePagesHanlder.setCurrentPage("myBoards");
 
         module = router[STORE.currentPage];
     } catch (e) {
