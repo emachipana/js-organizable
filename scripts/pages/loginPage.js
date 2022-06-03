@@ -45,12 +45,13 @@ function render() {
 
 function listenSignUpLink() {
     const link = document.querySelector(".form__link");
+    const root = document.querySelector("#root");
 
     link.addEventListener("click", event => {
         event.preventDefault();
 
         STORE.setCurrentPage("signup");
-        DOMHandler.load(SignUpPage(), document.querySelector("#root"));
+        DOMHandler.load(SignUpPage(), root);
     })
 }
 

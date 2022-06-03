@@ -70,6 +70,18 @@ function render() {
     `
 }
 
+function listenLoginLink() {
+    const link = document.querySelector(".form__link");
+    const root = document.querySelector("#root");
+
+    link.addEventListener("click", event => {
+        event.preventDefault();
+
+        STORE.currentPage("login");
+        DOMHanlder.load(LoginPage(), root)
+    })
+}
+
 function SignUpPage() {
     return {
         toString() {
