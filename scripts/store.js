@@ -4,6 +4,8 @@ const STORE = {
     currentPage: fromLocalStorage("current-page") || "login",
     user: null,
     boards: [],
+    starredBoards: [],
+    closedBoards: [],
     setUser(user) {
         this.user = user;
     },
@@ -12,7 +14,9 @@ const STORE = {
         this.currentPage = page;
     },
     setBoards(boards) {
-        this.boards = boards;
+        this.boards = boards.filter(board => board.starred === false && board.closed === false);
+        this.starredBoards = boards.filter(board => board.starred === true && board.closed === false)
+        this.closedBoards = boards.filter(board => board.closed === true);
     }
 }
 
