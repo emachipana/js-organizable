@@ -37,3 +37,8 @@
     justify-content: center;
     gap: 1rem;
 }
+
+.profile {
+    max-width: 520px;
+    margin: 0 auto;
+}
