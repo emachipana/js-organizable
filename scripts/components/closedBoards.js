@@ -8,7 +8,7 @@ function renderBoard(board){
             <p class="card__title">${board.name}</p>
             <div class="card__buttons">
                 <a href="#" class="card-button">
-                    <img src="./../assets/icons/recover.svg" alt="recover-icon" data-action="delete" data-id="${board.id}">
+                    <img src="./../assets/icons/recover.svg" alt="recover-icon" data-action="update" data-id="${board.id}">
                 </a>
                 <a href="#" class="card-button">
                     <img src="./../assets/icons/trash.svg" alt="trash-icon" data-action="deletePer" data-id="${board.id}">
@@ -31,12 +31,31 @@ function render() {
     `
 }
 
+function listenUpdateBoard() {
+    const button = document.querySelector(".container-cards");
+
+    button.addEventListener("click", async e => {
+        e.preventDefault();
+
+        const action = e.target.getAttribute("data-action");
+        if(!action) return
+        const id = e.target.getAttribute("data-id")
+        if(!id) return
+        if(action === "update" ) await updateBoard(action, id);
+        if(action === "deletePer") await deleteBoard(id);
+        const boards = await getBoards();
+        STORE.setBoards(boards);
+
+        DOMHandler.reload();
+    })
+}
+
 const closedBoards = {
     toString() {
         return render();
     },
     addListeners() {
-
+        listenUpdateBoard();
     }
 }
 
