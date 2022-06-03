@@ -1,9 +1,10 @@
 import { login } from "./../services/session-services.js";
 import { input } from "./../components/input.js";
 import { tokenKey } from "../config.js";
-import DOMHandler from "./../dom-handler.js"
-import STORE from "./../store.js"
-import { getBoards } from "./../services/board-services.js"
+import DOMHandler from "./../dom-handler.js";
+import STORE from "./../store.js";
+import { getBoards } from "./../services/board-services.js";
+import SignUpPage from "./signupPage.js"
 
 function render() {
     return `
@@ -42,13 +43,24 @@ function render() {
     `
 }
 
+function listenSignUpLink() {
+    const link = document.querySelector(".form__link");
+
+    link.addEventListener("click", event => {
+        event.preventDefault();
+
+        STORE.setCurrentPage("signup");
+        DOMHandler.load(SignUpPage(), document.querySelector("#root"));
+    })
+}
+
 function LoginPage() {
     return {
         toString() {
             return render();
         },
         addListeners() {
-
+            listenSignUpLink();
         }
     }
 }
