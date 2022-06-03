@@ -1,7 +1,7 @@
 import { input } from "./../components/input.js";
 import { signup } from "./../services/user-services.js";
 import { tokenKey } from "./../config.js";
-import DOMHanlder from "./../dom-handler.js"
+import DOMHandler from "./../dom-handler.js"
 import LoginPage from "./loginPage.js"
 import STORE from "../store.js";
 import { getBoards } from "../services/board-services.js";
@@ -63,7 +63,7 @@ function render() {
 
                 <div class="form__container-buttons">
                     <button type="submit" class="form__submit">Create Account</button>
-                    <a href="#" class="form__link">Login</a>
+                    <a href="#" class="form__link login">Login</a>
                 </div>
             </form>
         </main>
@@ -71,14 +71,14 @@ function render() {
 }
 
 function listenLoginLink() {
-    const link = document.querySelector(".form__link");
+    const link = document.querySelector(".login");
     const root = document.querySelector("#root");
 
     link.addEventListener("click", event => {
         event.preventDefault();
 
-        STORE.currentPage("login");
-        DOMHanlder.load(LoginPage(), root)
+        STORE.setCurrentPage("login");
+        DOMHandler.load(LoginPage(), root)
     })
 }
 
@@ -88,7 +88,7 @@ function SignUpPage() {
             return render();
         },
         addListeners() {
-
+            listenLoginLink();
         }
     }
 }
