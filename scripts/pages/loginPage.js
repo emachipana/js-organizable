@@ -71,6 +71,7 @@ function listenSubmitForm() {
         const user = await login(credentials);
 
         STORE.setUser(user);
+        sessionStorage.setItem("currentUser", JSON.stringify(user))
         STORE.setCurrentPage("boards");
 
         const boards = await getBoards();

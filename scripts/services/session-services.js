@@ -11,6 +11,7 @@ export async function login(credentials = { username, password }) {
 export async function logout() {
     const data = await apiFetch("logout", { method: "POST" });
     sessionStorage.removeItem(tokenKey);
-    
+    sessionStorage.removeItem("currentUser");
+
     return data;
 }

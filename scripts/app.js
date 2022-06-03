@@ -31,6 +31,8 @@ export async function App() {
     }
 
     try {
+        const user = JSON.parse(sessionStorage.getItem("currentUser"))
+        STORE.setUser(user);
         const boards = await getBoards();
         STORE.setBoards(boards);
 
