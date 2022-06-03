@@ -17,8 +17,17 @@
 }
 
 .form__submit:active {
-    outline: thick double var(--gray-300);
     animation: upDown 5s linear;
+}
+
+.form__submit--profile {
+    background-color: var(--primary-300);
+}
+
+.form__submit--delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @keyframes upDown {
