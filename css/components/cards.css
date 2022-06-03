@@ -1,5 +1,4 @@
 .card {
-    background-color: #90DBAF;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -37,4 +36,38 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/* colors  */
+
+.greenyellow {
+    background-color: #90DBAF;
+}
+
+.red {
+    background-color: #F77474;
+}
+
+.blue {
+    background-color: #60B5E5;
+}
+
+.orange {
+    background-color: #FFA759;
+}
+
+.purple {
+    background-color: #C499EC;
+}
+
+.pink {
+    background-color: #FABBD0;
+}
+
+.green {
+    background-color: #42D781;
+}
+
+.skyblue {
+    background-color: #9DE0F9;
 }
