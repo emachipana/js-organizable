@@ -1,6 +1,8 @@
 import DOMHandler from "./../dom-handler.js"
 import { input } from "./../components/input.js";
 import STORE from "../store.js";
+import { currentUserKey } from "../config.js";
+import { updateProfile } from "../services/user-services.js";
 
 function render() {
     const user = STORE.user;
@@ -62,12 +64,35 @@ function render() {
     `
 }
 
+function listenSubmitForm() {
+    const form = document.querySelector(".sessions-container__form");
+    const currentUser = STORE.user;
+
+    form.addEventListener("submit", async e => {
+        e.preventDefault()
+
+        const { username, email, first_name, last_name} = e.target;
+        const payload = {
+            username: username.value,
+            email: email.value,
+            first_name: first_name.value,
+            last_name: last_name.value
+        }
+
+        const userUpdated = await updateProfile(currentUser.id, payload);
+        STORE.setUser(userUpdated);
+        sessionStorage.setItem(currentUserKey, JSON.stringify(userUpdated))
+
+        DOMHandler.reload();
+    })
+}
+
 const myProfile = {
     toString() {
         return render();
     },
     addListeners() {
-
+        listenSubmitForm();
     }
 }
 
