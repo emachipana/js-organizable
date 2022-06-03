@@ -1,5 +1,6 @@
 import STORE from "./../store.js"
 import DOMHandler from "./../dom-handler.js"
+import { getBoards, updateBoard } from "../services/board-services.js";
 
 function validColor(color) {
     const colors = [ "greenyellow", "green", "orange", "red", "purple", "blue", "pink", "gray", "skyblue" ];
@@ -19,7 +20,7 @@ function renderBoard(board){
                     <img src="./../assets/icons/trash.svg" alt="trash-icon" data-action="delete" data-id="${board.id}">
                 </a>
                 <a href="#" class="card-button">
-                    <img src="./../assets/icons/star.svg" alt="star-icon" data-action="starred" data-id="${board.id}">
+                    <img src="./../assets/icons/${board.starred ? "star-fill.svg" : "star.svg"}" alt="star-icon" data-action="starred" data-id="${board.id}">
                 </a>
             </div>
         </div>
@@ -53,7 +54,7 @@ function render() {
 }
 
 function listenUpdateBoard() {
-    const button = document.querySelector(".home__section-cards");
+    const button = document.querySelector(".home__main");
 
     button.addEventListener("click", async e => {
         e.preventDefault();
@@ -63,6 +64,9 @@ function listenUpdateBoard() {
         const id = e.target.getAttribute("data-id");
         if(!id) return
         await updateBoard(action, id);
+        const boards = await getBoards();
+        STORE.setBoards(boards);
+
         DOMHandler.reload();
     })
 }
