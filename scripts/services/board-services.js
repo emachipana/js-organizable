@@ -23,3 +23,22 @@ export async function deleteBoard(id) {
 
     return boardDeleted;
 }
+
+export async function updateBoard(action, id) {
+    const board = await getBoard(id)
+    let body;
+    if(action === "delete") {
+        if(board.closed === false) {
+            body = {closed: true}
+        } else {
+            body = {closed: false}
+        }
+    }else {
+        if(board.starred === false) {
+            body = {starred: true}
+        }else {
+            body = {starred: false}
+        }
+    }
+    await apiFetch(`boards/${id}`, {method: "PATCH", body: body });
+}
