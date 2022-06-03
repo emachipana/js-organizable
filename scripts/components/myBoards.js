@@ -1,4 +1,5 @@
 import STORE from "./../store.js"
+import DOMHandler from "./../dom-handler.js"
 
 function validColor(color) {
     const colors = [ "greenyellow", "green", "orange", "red", "purple", "blue", "pink", "gray", "skyblue" ];
@@ -15,10 +16,10 @@ function renderBoard(board){
             <p class="card__title">${board.name}</p>
             <div class="card__buttons">
                 <a href="#" class="card-button">
-                    <img src="./../assets/icons/trash.svg" alt="trash-icon">
+                    <img src="./../assets/icons/trash.svg" alt="trash-icon" data-action="delete" data-id="${board.id}">
                 </a>
                 <a href="#" class="card-button">
-                    <img src="./../assets/icons/star.svg" alt="star-icon">
+                    <img src="./../assets/icons/star.svg" alt="star-icon" data-action="starred" data-id="${board.id}">
                 </a>
             </div>
         </div>
@@ -51,12 +52,27 @@ function render() {
     `
 }
 
+function listenUpdateBoard() {
+    const button = document.querySelector(".home__section-cards");
+
+    button.addEventListener("click", async e => {
+        e.preventDefault();
+
+        const action = e.target.getAttribute("data-action");
+        if(!action) return
+        const id = e.target.getAttribute("data-id");
+        if(!id) return
+        await updateBoard(action, id);
+        DOMHandler.reload();
+    })
+}
+
 const myBoards = {
     toString() {
         return render();
     },
     addListeners() {
-
+        listenUpdateBoard();
     }
 }
 
