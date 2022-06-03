@@ -5,6 +5,7 @@ import LoginPage from "./loginPage.js"
 import STORE from "../store.js";
 import { getBoards } from "../services/board-services.js";
 import HomePage from "./homePage.js";
+import { currentUserKey } from "../config.js";
 
 function render() {
     return `
@@ -100,6 +101,7 @@ function listenSubmitForm() {
 
         const user = await signup(credentials);
         STORE.setUser(user);
+        sessionStorage.setItem(currentUserKey, JSON.stringify(user))
         STORE.setCurrentPage("boards");
         const boards = await getBoards();
         STORE.setBoards(boards);
