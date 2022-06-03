@@ -34,6 +34,8 @@
     padding: 4px;
     border-radius: 50%;
     display: flex;
+    width: 26px;
+    height: 25px;
     align-items: center;
     justify-content: center;
 }

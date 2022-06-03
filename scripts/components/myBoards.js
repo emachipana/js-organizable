@@ -1,15 +1,6 @@
 import STORE from "./../store.js"
 import DOMHandler from "./../dom-handler.js"
-import { getBoards, updateBoard } from "../services/board-services.js";
-
-function validColor(color) {
-    const colors = [ "greenyellow", "green", "orange", "red", "purple", "blue", "pink", "gray", "skyblue" ];
-    if(colors.includes(color)){
-        return color;
-    } else {
-        return "gray";
-    }
-}
+import { getBoards, updateBoard, validColor } from "../services/board-services.js";
 
 function renderBoard(board){
     return `
@@ -17,7 +8,7 @@ function renderBoard(board){
             <p class="card__title">${board.name}</p>
             <div class="card__buttons">
                 <a href="#" class="card-button">
-                    <img src="./../assets/icons/trash.svg" alt="trash-icon" data-action="delete" data-id="${board.id}">
+                    <img src="./../assets/icons/trash.svg" alt="trash-icon" data-action="update" data-id="${board.id}">
                 </a>
                 <a href="#" class="card-button">
                     <img src="./../assets/icons/${board.starred ? "star-fill.svg" : "star.svg"}" alt="star-icon" data-action="starred" data-id="${board.id}">
