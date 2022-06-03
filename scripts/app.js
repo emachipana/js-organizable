@@ -1,4 +1,4 @@
-import { tokenKey } from "./config.js";
+import { tokenKey, currentUserKey } from "./config.js";
 import DOMHandler from "./dom-handler.js";
 import LoginPage from "./pages/loginPage.js";
 import SignUpPage from "./pages/signupPage.js";
@@ -31,7 +31,7 @@ export async function App() {
     }
 
     try {
-        const user = JSON.parse(sessionStorage.getItem("currentUser"))
+        const user = JSON.parse(sessionStorage.getItem(currentUserKey))
         STORE.setUser(user);
         const boards = await getBoards();
         STORE.setBoards(boards);
