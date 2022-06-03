@@ -12,7 +12,7 @@ export async function signup(newUser = {
     const { token, ...user } = await apiFetch("users", { body: newUser });
     sessionStorage.setItem(tokenKey, token);
     
-    return user
+    return user;
 }
 
 export async function updateProfile(id, payload = {

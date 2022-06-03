@@ -1,6 +1,5 @@
 import { login } from "./../services/session-services.js";
 import { input } from "./../components/input.js";
-import { tokenKey } from "../config.js";
 import DOMHandler from "./../dom-handler.js";
 import STORE from "./../store.js";
 import { getBoards } from "./../services/board-services.js";

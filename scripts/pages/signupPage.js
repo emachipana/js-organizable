@@ -1,10 +1,10 @@
 import { input } from "./../components/input.js";
 import { signup } from "./../services/user-services.js";
-import { tokenKey } from "./../config.js";
 import DOMHandler from "./../dom-handler.js"
 import LoginPage from "./loginPage.js"
 import STORE from "../store.js";
 import { getBoards } from "../services/board-services.js";
+import HomePage from "./homePage.js";
 
 function render() {
     return `
@@ -58,7 +58,7 @@ function render() {
                     id: "password",
                     required: true,
                     placeholder: "password",
-                    type: "text"
+                    type: "password"
                 })}
 
                 <div class="form__container-buttons">
@@ -83,7 +83,29 @@ function listenLoginLink() {
 }
 
 function listenSubmitForm() {
+    const form = document.querySelector(".sessions-container__form");
+    const root = document.querySelector("#root");
 
+    form.addEventListener("submit", async e => {
+        e.preventDefault();
+
+        const { username, email, first_name, last_name, password } = e.target;
+        const credentials = {
+            username: username.value,
+            email: email.value,
+            first_name: first_name.value,
+            last_name: last_name.value,
+            password: password.value
+        }
+
+        const user = await signup(credentials);
+        STORE.setUser(user);
+        STORE.setCurrentPage("boards");
+        const boards = await getBoards();
+        STORE.setBoards(boards);
+
+        DOMHandler.load(HomePage(), root);
+    })
 }
 
 function SignUpPage() {
