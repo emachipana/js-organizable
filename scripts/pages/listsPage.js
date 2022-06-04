@@ -1,4 +1,5 @@
 import DOMHandler from "../dom-handler.js";
+import { createList } from "../services/lists-services.js";
 import STORE from "../store.js";
 import HomePage from "./homePage.js";
 
@@ -63,17 +64,43 @@ function render() {
                 <div class="lists">
                     ${lists.map(renderLists).join("")}
                     <div class="list">
-                        <form class="list__form">
-                            <input type="text" name="card" id="card" class="form__card-input" placeholder="new list" required>
-                            <a href="#" class="form__card-icon">
+                        <form class="list__form new-list">
+                            <input type="text" name="listName" id="listName" class="form__card-input" placeholder="new list" required>
+                            <button type="submit" class="form__card-icon">
                                 <img src="./../assets/icons/add.svg" alt="add-icon">
-                            </a>
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
         </main>
     `
+}
+
+function listenSubmitNewList() {
+    const board = STORE.currentBoard || JSON.parse(localStorage.getItem("currentBoard"));
+    const lists = STORE.currentLists || JSON.parse(localStorage.getItem("currentLists"));
+    const form = document.querySelector(".new-list");
+
+    form.addEventListener("submit", async e => {
+        e.preventDefault();
+
+        const { listName } = e.target;
+        const data = {
+            name: listName.value
+        }
+
+        const newList = await createList(board.id, data);
+        const list = {
+            ...newList,
+            listId: newList.id,
+            cards: []
+        }
+        lists.push(list);
+        STORE.setCurrentLists(lists);
+        
+        DOMHandler.reload();
+    })
 }
 
 function listenBackButton() {
@@ -95,6 +122,7 @@ function ListPage() {
         },
         addListeners() {
             listenBackButton();
+            listenSubmitNewList();
         }
     }
 }
