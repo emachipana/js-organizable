@@ -13,3 +13,7 @@ export async function createCard(listId, newCard = { cardName }) {
 export async function deleteCard(listId, cardId) {
     await apiFetch(`lists/${listId}/cards/${cardId}`, { method: "DELETE" });
 }
+
+export async function updateCardOrder(listId, data = { ids }) {
+    await apiFetch(`lists/${listId}/cards/sort`, { body: data });
+}
