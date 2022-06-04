@@ -39,6 +39,9 @@ function render() {
             <h2 class="cards__title">Boards</h2>
             <div class="container-cards">
                 ${STORE.boards.map(renderBoard).join("")}
+                <div class="create-container">
+                    <p>Create Board</p>
+                </div>
             </div>
         </section>
     `
