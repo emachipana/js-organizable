@@ -44,17 +44,44 @@ function render() {
                 </div>
             </div>
             <div class="modal none">
-                <form class="board-form green">
-                    <input type="hidden" value="gray" name="color" />
-                    <input type="text" name="name" class="board-form__input" placeholder="Board Name" required/>
-                    <button type="submit" class="board-form__button">create</button>
-                </form>
-                <a href="#" class="close-icon">
-                    <img src="./assets/icons/close.svg" alt="close-icon" />
-                </a>
+                <div class="new-board">
+                    <form class="board-form green">
+                        <input type="hidden" value="gray" name="color" />
+                        <input type="text" name="boardName" class="board-form__input" placeholder="Board Name" required/>
+                        <input type="submit" class="board-form__button" value="create" />
+                    </form>
+                    <ul class="color-palette">
+                        <li class="color__item greenyellow" data-color="greenyellow"></li>
+                        <li class="color__item red" data-color="red"></li>
+                        <li class="color__item blue" data-color="blue"></li>
+                        <li class="color__item orange" data-color="orange"></li>
+                        <li class="color__item purple" data-color="purple"></li>
+                        <li class="color__item pink" data-color="pink"></li>
+                        <li class="color__item green" data-color="green"></li>
+                        <li class="color__item gray" data-color="gray"></li>
+                        <li class="color__item skyblue" data-color="skyblue"></li>
+                    <ul>
+                    </div>
+                    <a href="#" class="close-icon">
+                        <img src="./assets/icons/close.svg" alt="close-icon" />
+                    </a>
             </div>
         </section>
     `
+}
+
+function listenColorPalette() {
+    const ul = document.querySelector(".color-palette");
+    const form = document.querySelector(".board-form")
+
+    ul.addEventListener("click", e => {
+        e.preventDefault()
+
+        const color = e.target.getAttribute("data-color")
+        if(!color) return
+        form.className = `board-form ${color}`;
+        form.color.value = color
+    })
 }
 
 function listenCreateBoard() {
@@ -105,6 +132,7 @@ const myBoards = {
         listenUpdateBoard();
         listenCreateBoard();
         closeModal();
+        listenColorPalette();
     }
 }
 
