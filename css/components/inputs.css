@@ -60,3 +60,12 @@
     border: none;
     cursor: pointer;
 }
+
+.form__card-icon img {
+    width: 14px;
+    height: 14px;
+}
+
+.edit-input {
+    max-width: 68%;
+}
