@@ -1,6 +1,7 @@
 import STORE from "./../store.js"
 import DOMHandler from "./../dom-handler.js"
 import { getBoards, updateBoard, validColor, createBoard } from "../services/board-services.js";
+import ListPage from "../pages/listsPage.js";
 
 function renderBoard(board){
     return `

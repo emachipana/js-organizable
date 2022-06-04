@@ -6,6 +6,7 @@ const STORE = {
     boards: [],
     starredBoards: [],
     closedBoards: [],
+    currentBoard: null,
     setUser(user) {
         this.user = user;
     },
@@ -17,6 +18,10 @@ const STORE = {
         this.boards = boards.filter(board => board.starred === false && board.closed === false);
         this.starredBoards = boards.filter(board => board.starred === true && board.closed === false)
         this.closedBoards = boards.filter(board => board.closed === true);
+    },
+    setCurrentBoard(board) {
+        this.currentBoard = board;
+        localStorage.setItem("currentBoard", JSON.stringify(board));
     }
 }
 
