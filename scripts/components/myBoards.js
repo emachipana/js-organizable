@@ -1,6 +1,6 @@
 import STORE from "./../store.js"
 import DOMHandler from "./../dom-handler.js"
-import { getBoards, updateBoard, validColor } from "../services/board-services.js";
+import { getBoards, updateBoard, validColor, createBoard } from "../services/board-services.js";
 
 function renderBoard(board){
     return `
@@ -46,8 +46,9 @@ function render() {
             <div class="modal none">
                 <div class="new-board">
                     <form class="board-form green">
-                        <input type="hidden" value="gray" name="color" />
+                        <input type="hidden" value="green" name="color" />
                         <input type="text" name="boardName" class="board-form__input" placeholder="Board Name" required/>
+                        <p class="error-message"></p>
                         <input type="submit" class="board-form__button" value="create" />
                     </form>
                     <ul class="color-palette">
@@ -68,6 +69,32 @@ function render() {
             </div>
         </section>
     `
+}
+
+function listenSubmitForm() {
+    const form = document.querySelector(".board-form");
+    const button = document.querySelector(".board-form__button");
+    const p = document.querySelector(".error-message");
+    const modal = document.querySelector(".modal");
+
+    button.addEventListener("click", async e => {
+        e.preventDefault();
+
+        const color = form.color.value;
+        const boardName = form.boardName.value;
+        if(!boardName) return p.textContent = "can't be blank";
+        const data = {
+            color,
+            name: boardName
+        }
+
+        await createBoard(data);
+        const boards = await getBoards();
+        STORE.setBoards(boards);
+        modal.classList.add("none");
+
+        DOMHandler.reload();
+    })
 }
 
 function listenColorPalette() {
@@ -133,6 +160,7 @@ const myBoards = {
         listenCreateBoard();
         closeModal();
         listenColorPalette();
+        listenSubmitForm();
     }
 }
 
