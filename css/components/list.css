@@ -37,7 +37,7 @@
 }
 
 .move {
-    cursor: move;
+    cursor: grabbing;
 }
 
 .list__card {
