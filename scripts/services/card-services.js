@@ -7,5 +7,9 @@ export function getCards(list) {
 export async function createCard(listId, newCard = { cardName }) {
     const cardCreated = await apiFetch(`lists/${listId}/cards`, { body: newCard });
 
-    return cardCreated;
+    return cardCreated; // retorna listId tambien
 } 
+
+export async function deleteCard(listId, cardId) {
+    await apiFetch(`lists/${listId}/cards/${cardId}`, { method: "DELETE" });
+}
