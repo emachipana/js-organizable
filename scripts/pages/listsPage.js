@@ -1,5 +1,5 @@
 import DOMHandler from "../dom-handler.js";
-import { createList, deleteList } from "../services/lists-services.js";
+import { createList, deleteList, updateList } from "../services/lists-services.js";
 import STORE from "../store.js";
 import HomePage from "./homePage.js";
 
@@ -19,23 +19,23 @@ function renderLists(list) {
 
     return `
         <div class="list move">
-            <section class="list__header ${list.name + list.listId}">
+            <section class="list__header ${list.name.replace(/ /g, "") + list.listId}">
                 <h1 class="list__header__title">${list.name}</h1>
                 <div class="list__header__buttons">
                     <a href="#">
-                        <img src="./../assets/icons/edit.svg" alt="edit-icon" data-listId="${list.listId}" data-action="update" data-name="${list.name}">
+                        <img src="./../assets/icons/edit.svg" alt="edit-icon" data-listId="${list.listId}" data-action="update" data-name="${list.name.replace(/ /g, "")}">
                     </a>
                     <a href="#">
                         <img src="./../assets/icons/trash.svg" alt="trash-icon" data-listId="${list.listId}" data-action="delete">
                     </a>
                 </div>
             </section>
-            <form class="form-editList ${list.name + list.listId}1 none">
-                <input type="text" name="card" id="card" class="form__card-input edit-input" placeholder="edit card" value="${list.name}" required>
-                <button type="submit" class="form__card-icon">
+            <form class="form-editList ${list.name.replace(/ /g, "") + list.listId}1 none">
+                <input type="text" name="listName" id="card" class="form__card-input edit-input" placeholder="edit card" value="${list.name}" required>
+                <button type="submit" class="form__card-icon ${list.name.replace(/ /g, "") + list.listId}3">
                     <img src="./../assets/icons/check.svg" alt="add-icon">
                 </button>
-                <a href="#" class="form__card-icon ${list.name + list.listId}2">
+                <a href="#" class="form__card-icon ${list.name.replace(/ /g, "") + list.listId}2">
                     <img src="./../assets/icons/close.svg" />
                 </a>
             </form>
@@ -139,8 +139,29 @@ async function deleteActualList(listId, boardId) {
     DOMHandler.reload();
 }
 
-async function editActualList(listId, boardId) {
-    console.log("pendig...", listId, boardId)
+async function editActualList(listId, boardId, form, className) {
+    const lists = STORE.currentLists || JSON.parse(localStorage.getItem("currentLists"));
+    const button = document.querySelector(`.${className}3`);
+
+    button.addEventListener("click", async e => {
+        e.preventDefault();
+
+        const newName = form.listName.value
+
+        if(!newName) return
+
+        const payload = {
+            name: newName
+        }
+        const listUpdated = await updateList(boardId, listId, payload);
+
+        const index = lists.findIndex(list => list.listId === listUpdated.id );
+        lists[index].name = listUpdated.name; 
+
+        STORE.setCurrentLists(lists);
+
+        DOMHandler.reload();
+    })
 }
 
 function listenChangeStateList() {
@@ -165,7 +186,7 @@ function listenChangeStateList() {
             form.classList.remove("none");
             listenCancelEdit(name + listId);
 
-            return editActualList(listId, board.id, form);
+            return editActualList(listId, board.id, form, name + listId);
         }
     })
 }
