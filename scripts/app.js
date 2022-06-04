@@ -6,6 +6,7 @@ import HomePage from "./pages/homePage.js"
 import STORE from "./store.js";
 import { getBoards } from "./services/board-services.js";
 import HomePagesHanlder, { homePagesKey } from "./pages/homePagesHandler.js";
+import ListPage from "./pages/listsPage.js";
 
 const root = document.querySelector("#root");
 
@@ -13,7 +14,7 @@ const router = {
     "login": LoginPage,
     "signup": SignUpPage,
     "boards": HomePage,
-    "lists": "pending"
+    "lists": ListPage
 }
 
 export async function App() {
