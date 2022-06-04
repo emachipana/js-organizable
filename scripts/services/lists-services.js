@@ -21,3 +21,8 @@ export async function deleteList(boardId, listId) {
     await apiFetch(`boards/${boardId}/lists/${listId}`, { method: "DELETE" });
 }
 
+export async function updateListOrder(boardId, data = { ids }) {
+    await apiFetch(`boards/${boardId}/lists/sort`, { body: data });
+}
+
+// tener un current board en localStorage para manejar su id
