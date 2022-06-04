@@ -89,3 +89,13 @@
 .close-icon {
     transform: translateY(-70px);
 }
+
+.error-message {
+    margin: 0.4rem 0.2rem;
+    color: var(--error-300);
+    font-family: var(--font-secondary);
+    font-weight: 500;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
