@@ -1,15 +1,15 @@
 import DOMHandler from "../dom-handler.js";
-import { createCard } from "../services/card-services.js";
+import { createCard, deleteCard } from "../services/card-services.js";
 import { createList, deleteList, updateList } from "../services/lists-services.js";
 import STORE from "../store.js";
 import HomePage from "./homePage.js";
 
-function renderCard(card) {
+function renderCard(card, listId) {
     return `
         <div class="list__card">
             <h2 class="list__card__text">${card.name}</h2>
             <a href="#">
-                <img src="./../assets/icons/trash.svg" alt="trash-icon">
+                <img src="./../assets/icons/trash.svg" alt="trash-icon" data-card="deleteCard" data-cardId="${card.cardId}" data-listId="${listId}">
             </a>
         </div>
     `
@@ -42,7 +42,7 @@ function renderLists(list) {
             </form>
             <hr>
             <section class="list__cards">
-                ${cards.map(renderCard).join("")}
+                ${cards.map(card => renderCard(card, list.listId)).join("")}
             </section>
             <form class="list__form out form${list.listId}">
                 <input type="text" name="cardName" id="card" class="form__card-input" placeholder="new card" required>
@@ -85,6 +85,29 @@ function render() {
             </div>
         </main>
     `
+}
+
+function listenDeleteCard() {
+    const link = document.querySelector(".lists");
+    const lists = STORE.currentLists || JSON.parse(localStorage.getItem("currentLists"));
+    
+    link.addEventListener("click", async e => {
+        e.preventDefault();
+
+        if(!e.target.getAttribute("data-card")) return
+        const cardId = e.target.getAttribute("data-cardId");
+        if(!cardId) return
+        const listId = e.target.getAttribute("data-listId");
+        await deleteCard(listId, cardId);
+
+        const index = lists.findIndex(list => list.listId == listId);
+        const indexCard = lists[index].cards.findIndex(card => card.cardId == cardId);
+        lists[index].cards.splice(indexCard, 1);
+
+        STORE.setCurrentLists(lists);
+
+        DOMHandler.reload();
+    })
 }
 
 function listenNewCard() {
@@ -249,6 +272,7 @@ function ListPage() {
             listenSubmitNewList();
             listenChangeStateList();
             listenNewCard();
+            listenDeleteCard();
         }
     }
 }
