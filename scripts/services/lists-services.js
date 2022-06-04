@@ -10,3 +10,9 @@ export function createList(boardId, newList = { listName }) {
 
     return listCreated;
 }
+
+export function updateList(boardId, listId, payload = { listName }) {
+    const listUpdated = await apiFetch(`boards/${boardId}/lists/${listId}`, { method: "PATCH", body: payload });
+
+    return listUpdated;
+}
