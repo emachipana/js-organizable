@@ -57,4 +57,15 @@
     border-radius: 50%;
     width: 28px;
     height: 28px;
+    border: none;
+    cursor: pointer;
+}
+
+.form__card-icon img {
+    width: 14px;
+    height: 14px;
+}
+
+.edit-input {
+    max-width: 68%;
 }

@@ -7,12 +7,14 @@
     gap: 0.5rem;
     width: 280px;
     height: fit-content;
+    position: relative;
 }
 
 .list__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 0.5rem;
 }
 
 .list__header__title {
@@ -21,6 +23,7 @@
     font-size: 20px;
     line-height: 28px;
     color: var(--gray-500);
+    transition: opacity 0.4s;
 }
 
 .list__header__buttons {
@@ -37,7 +40,7 @@
 }
 
 .move {
-    cursor: move;
+    cursor: grabbing;
 }
 
 .list__card {
@@ -55,4 +58,20 @@
     font-size: 16px;
     line-height: 24px;
     color: var(--gray-500);
+}
+
+.form-editList {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: absolute;
+    justify-content: center;
+    max-width: 275px;
+    max-height: 30px;
+    transition: opacity 0.4s;
+    top: 10px;
+}
+
+.display-n {
+    display: none;
 }
