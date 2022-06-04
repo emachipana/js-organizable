@@ -19,17 +19,26 @@ function renderLists(list) {
 
     return `
         <div class="list move">
-            <section class="list__header">
+            <section class="list__header ${list.name + list.listId}">
                 <h1 class="list__header__title">${list.name}</h1>
                 <div class="list__header__buttons">
                     <a href="#">
-                        <img src="./../assets/icons/edit.svg" alt="edit-icon" data-listId="${list.listId}" data-action="edit">
+                        <img src="./../assets/icons/edit.svg" alt="edit-icon" data-listId="${list.listId}" data-action="update" data-name="${list.name}">
                     </a>
                     <a href="#">
                         <img src="./../assets/icons/trash.svg" alt="trash-icon" data-listId="${list.listId}" data-action="delete">
                     </a>
                 </div>
             </section>
+            <form class="form-editList ${list.name + list.listId}1 none">
+                <input type="text" name="card" id="card" class="form__card-input edit-input" placeholder="edit card" value="${list.name}" required>
+                <button type="submit" class="form__card-icon">
+                    <img src="./../assets/icons/check.svg" alt="add-icon">
+                </button>
+                <a href="#" class="form__card-icon ${list.name + list.listId}2">
+                    <img src="./../assets/icons/close.svg" />
+                </a>
+            </form>
             <hr>
             <section class="list__cards">
                 ${cards.map(renderCard).join("")}
@@ -75,6 +84,16 @@ function render() {
             </div>
         </main>
     `
+}
+
+function listenCancelEdit(className) {
+    const button = document.querySelector(`.${className}2`);
+
+    button.addEventListener("click", e => {
+        e.preventDefault()
+
+        DOMHandler.reload();
+    })
 }
 
 function listenSubmitNewList() {
@@ -131,15 +150,22 @@ function listenChangeStateList() {
     list.addEventListener("click", e => {
         e.preventDefault()
 
-        const listId = e.target.getAttribute("data-listId");
-        if(!listId) return
         const action = e.target.getAttribute("data-action");
         if(!action) return
 
-        if(action==="delete"){
+        const listId = e.target.getAttribute("data-listId");
+        if(!listId) return
+        if(action === "delete"){
             return deleteActualList(listId, board.id);
         }else {
-            return editActualList(listId, board.id);
+            const name = e.target.getAttribute("data-name");
+            const currentList = document.querySelector(`.${name + listId}`);
+            currentList.classList.add("none");
+            const form = document.querySelector(`.${name + listId}1`)
+            form.classList.remove("none");
+            listenCancelEdit(name + listId);
+
+            return editActualList(listId, board.id, form);
         }
     })
 }
