@@ -43,8 +43,40 @@ function render() {
                     <p>Create Board</p>
                 </div>
             </div>
+            <div class="modal none">
+                <form class="board-form green">
+                    <input type="hidden" value="gray" name="color" />
+                    <input type="text" name="name" class="board-form__input" placeholder="Board Name" required/>
+                    <button type="submit" class="board-form__button">create</button>
+                </form>
+                <a href="#" class="close-icon">
+                    <img src="./assets/icons/close.svg" alt="close-icon" />
+                </a>
+            </div>
         </section>
     `
+}
+
+function listenCreateBoard() {
+    const el = document.querySelector(".create-container");
+    const modal = document.querySelector(".modal");
+
+    el.addEventListener("click", e => {
+        e.preventDefault();
+
+        modal.classList.remove("none");
+    })
+}
+
+function closeModal() {
+    const button = document.querySelector(".close-icon");
+    const modal = document.querySelector(".modal");
+
+    button.addEventListener("click", e => {
+        e.preventDefault();
+
+        modal.classList.add("none");
+    })
 }
 
 function listenUpdateBoard() {
@@ -71,6 +103,8 @@ const myBoards = {
     },
     addListeners() {
         listenUpdateBoard();
+        listenCreateBoard();
+        closeModal();
     }
 }
 
