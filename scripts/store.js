@@ -7,6 +7,7 @@ const STORE = {
     starredBoards: [],
     closedBoards: [],
     currentBoard: null,
+    currentLists: [],
     setUser(user) {
         this.user = user;
     },
@@ -22,6 +23,10 @@ const STORE = {
     setCurrentBoard(board) {
         this.currentBoard = board;
         localStorage.setItem("currentBoard", JSON.stringify(board));
+    },
+    setCurrentLists(lists) {
+        this.currentLists = lists;
+        localStorage.setItem("currentLists", JSON.stringify(lists));
     }
 }
 

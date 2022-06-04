@@ -1,11 +1,12 @@
 import STORE from "./../store.js"
 import DOMHandler from "./../dom-handler.js"
-import { getBoards, updateBoard, validColor, createBoard } from "../services/board-services.js";
+import { getBoards, updateBoard, validColor, createBoard, getBoard } from "../services/board-services.js";
 import ListPage from "../pages/listsPage.js";
+import { getLists } from "./../services/lists-services.js";
 
 function renderBoard(board){
     return `
-        <div class="card ${validColor(board.color)}">
+        <div class="card ${validColor(board.color)}" data-boardId="${board.id}">
             <p class="card__title">${board.name}</p>
             <div class="card__buttons">
                 <a href="#" class="card-button">
@@ -152,6 +153,24 @@ function listenUpdateBoard() {
     })
 }
 
+function listenShowBoard() {
+    const board = document.querySelector(".home__main");
+    const root = document.querySelector("#root");
+
+    board.addEventListener("click", async e => {
+        e.preventDefault()
+
+        const boardId = e.target.getAttribute("data-boardId");
+        if(!boardId) return;
+        
+        const board = await getBoard(boardId);
+        STORE.setCurrentBoard(board);
+        STORE.setCurrentPage("lists");
+        STORE.setCurrentLists(getLists(board));
+        DOMHandler.load(ListPage(), root);
+    })
+}
+
 const myBoards = {
     toString() {
         return render();
@@ -162,6 +181,7 @@ const myBoards = {
         closeModal();
         listenColorPalette();
         listenSubmitForm();
+        listenShowBoard();
     }
 }
 
