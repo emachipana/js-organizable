@@ -7,7 +7,7 @@ const STORE = {
     starredBoards: [],
     closedBoards: [],
     currentBoard: null,
-    currentLists: [],
+    currentLists: null,
     setUser(user) {
         this.user = user;
     },
