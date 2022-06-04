@@ -20,7 +20,6 @@ function render() {
                     icon: "./../assets/icons/avatar.svg",
                     id: "username",
                     required: true,
-                    value: "enmanuel",
                     placeholder: "username",
                     type: "text"
                 })}
@@ -30,7 +29,6 @@ function render() {
                     icon: "./../assets/icons/key.svg",
                     id: "password",
                     required: true,
-                    value: "123456",
                     placeholder: "password",
                     type: "password"
                 })}
