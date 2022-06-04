@@ -61,3 +61,31 @@
 .board-form__button:active {
     background-color: var(--gray-200);
 }
+
+.new-board {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 0 1rem;
+}
+
+.color-palette {
+    list-style: none;
+    width: 112px;
+    height: 112px;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.color__item {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.close-icon {
+    transform: translateY(-70px);
+}
