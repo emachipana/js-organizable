@@ -16,3 +16,7 @@ export function updateList(boardId, listId, payload = { listName }) {
 
     return listUpdated;
 }
+
+export function deleteList(boardId, listId) {
+    await apiFetch(`boards/${boardId}/lists/${listId}`, { method: "DELETE" });
+}
