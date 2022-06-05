@@ -22,7 +22,7 @@ export async function deleteList(boardId, listId) {
 }
 
 export async function updateListOrder(ids) {
-    const board = STORE.currentBoard || JSON.parse(localStorage.getItem("currentBoard"));;
+    const board = STORE.currentBoard || JSON.parse(localStorage.getItem("currentBoard"));
     await apiFetch(`boards/${board.id}/lists/sort`, { body: { ids: ids } });
     return board.id;
 }
