@@ -1,6 +1,7 @@
 import DOMHandler from "../dom-handler.js";
+import { getBoard } from "../services/board-services.js";
 import { createCard, deleteCard } from "../services/card-services.js";
-import { createList, deleteList, updateList } from "../services/lists-services.js";
+import { createList, deleteList, getLists, updateList, updateListOrder } from "../services/lists-services.js";
 import STORE from "../store.js";
 import HomePage from "./homePage.js";
 
@@ -19,7 +20,7 @@ function renderLists(list) {
     const cards = list.cards;
 
     return `
-        <div class="list move">
+        <div class="list move" data-id="${list.listId}">
             <section class="list__header ${list.name.replace(/ /g, "") + list.listId}">
                 <h1 class="list__header__title">${list.name}</h1>
                 <div class="list__header__buttons">
@@ -85,6 +86,23 @@ function render() {
             </div>
         </main>
     `
+}
+
+function addSortableToLists() {
+    const listContainer = document.querySelector(".lists");
+
+    new Sortable(listContainer, {
+        animation: 150,
+        store: {
+            set: async function (sortable) {
+                const order = sortable.toArray().map((id) => +id);
+                const boardId = await updateListOrder(order);
+                const board = await getBoard(boardId);
+                STORE.setCurrentBoard(board);
+                STORE.setCurrentLists(getLists(board));
+            }
+        }
+    });
 }
 
 function listenDeleteCard() {
@@ -273,6 +291,7 @@ function ListPage() {
             listenChangeStateList();
             listenNewCard();
             listenDeleteCard();
+            addSortableToLists();
         }
     }
 }
