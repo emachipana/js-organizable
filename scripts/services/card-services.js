@@ -1,3 +1,4 @@
+import STORE from "../store.js";
 import apiFetch from "./api-fetch.js";
 
 export async function createCard(listId, newCard = { cardName }) {
@@ -10,6 +11,8 @@ export async function deleteCard(listId, cardId) {
     await apiFetch(`lists/${listId}/cards/${cardId}`, { method: "DELETE" });
 }
 
-export async function updateCardOrder(listId, data = { ids }) {
-    await apiFetch(`lists/${listId}/cards/sort`, { body: data });
+export async function updateCardOrder(listId, ids) {
+    const board = STORE.currentBoard || JSON.parse(localStorage.getItem("currentBoard"));
+    await apiFetch(`lists/${listId}/cards/sort`, { body: { ids: ids } });
+    return board.id;
 }

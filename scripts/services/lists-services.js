@@ -1,3 +1,4 @@
+import STORE from "../store.js";
 import apiFetch from "./api-fetch.js"
 
 export function getLists(board) {
@@ -20,8 +21,10 @@ export async function deleteList(boardId, listId) {
     await apiFetch(`boards/${boardId}/lists/${listId}`, { method: "DELETE" });
 }
 
-export async function updateListOrder(boardId, data = { ids }) {
-    await apiFetch(`boards/${boardId}/lists/sort`, { body: data });
+export async function updateListOrder(ids) {
+    const board = STORE.currentBoard || JSON.parse(localStorage.getItem("currentBoard"));
+    await apiFetch(`boards/${board.id}/lists/sort`, { body: { ids: ids } });
+    return board.id;
 }
 
 // tener un current board en localStorage para manejar su id
