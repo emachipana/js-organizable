@@ -1,13 +1,13 @@
 import DOMHandler from "../dom-handler.js";
 import { getBoard } from "../services/board-services.js";
-import { createCard, deleteCard } from "../services/card-services.js";
+import { createCard, deleteCard, updateCardOrder } from "../services/card-services.js";
 import { createList, deleteList, getLists, updateList, updateListOrder } from "../services/lists-services.js";
 import STORE from "../store.js";
 import HomePage from "./homePage.js";
 
 function renderCard(card, listId) {
     return `
-        <div class="list__card">
+        <div class="list__card" data-id="${card.cardId}">
             <h2 class="list__card__text">${card.name}</h2>
             <a href="#">
                 <img src="./../assets/icons/trash.svg" alt="trash-icon" data-card="deleteCard" data-cardId="${card.cardId}" data-listId="${listId}">
@@ -95,7 +95,7 @@ function addSortableToLists() {
         animation: 150,
         store: {
             set: async function (sortable) {
-                const order = sortable.toArray().map((id) => +id);
+                const order = sortable.toArray().map(id => +id);
                 const boardId = await updateListOrder(order);
                 const board = await getBoard(boardId);
                 STORE.setCurrentBoard(board);
@@ -103,6 +103,28 @@ function addSortableToLists() {
             }
         }
     });
+}
+
+function addSortableToCards() {
+    const cardContainers = document.querySelectorAll(".list__cards");
+
+    cardContainers.forEach(cardContainer => {
+        const list = cardContainer.closest(".list");
+        const listId = +list.dataset.id;
+
+        new Sortable(cardContainer, {
+            animation: 150,
+            store: {
+                set: async function (sortable) {
+                    const order = sortable.toArray().map(id => +id);
+                    const boardId = await updateCardOrder(listId, order);
+                    const board = await getBoard(boardId);
+                    STORE.setCurrentBoard(board);
+                    STORE.setCurrentLists(getLists(board)); 
+                }
+            }
+        })
+    })
 }
 
 function listenDeleteCard() {
@@ -292,6 +314,7 @@ function ListPage() {
             listenNewCard();
             listenDeleteCard();
             addSortableToLists();
+            addSortableToCards();
         }
     }
 }
